@@ -9,11 +9,11 @@
     
     "manifest_version": 3,
 
-    "name": "StreamZen",
+    "name": "jobgrabber",
 
     "version": "1.0",
 
-    "description": "An extension to stop all the popups and false Links in Streaming Website",
+    "description": "An extension to grab manually jobs and add them to a json file",
 
 
     "permissions": ["activeTab","contextMenus","tabs","scripting"],
