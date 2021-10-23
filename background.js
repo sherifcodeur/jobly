@@ -41,7 +41,7 @@ chrome.runtime.onInstalled.addListener(async ()=>{
         chrome.scripting.executeScript(
             {
               target: {tabId: tabid},
-              files: ['scriptos.js'],
+              files: ['script1.js'],
             },
             () => { console.log("executed scriptos") });
 
