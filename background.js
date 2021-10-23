@@ -1,18 +1,17 @@
 
 
-
+// launch when install the extension
 chrome.runtime.onInstalled.addListener(async ()=>{
 
 
-
+      // creating context menu that appear only when selected item
         chrome.contextMenus.create({
             title: 'job title grab',
             id:"1",
-            contexts:["selection"]     
-        
-        
+            contexts:["selection"]          
         })
 
+        // getting url and open it in new tab
         let url = chrome.runtime.getURL("hello.html");
         let tab = await chrome.tabs.create({ url });
 
@@ -21,7 +20,7 @@ chrome.runtime.onInstalled.addListener(async ()=>{
 
 })
 
-
+// gets the current tab 
   async function getCurrentTab() {
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
@@ -29,41 +28,26 @@ chrome.runtime.onInstalled.addListener(async ()=>{
   }
 
 
-// function log(message) {
-//     document.getElementById('udemy').textContent += message + '\n';
-//   }
-  
+  // when clicked one of the contextMenu
   chrome.contextMenus.onClicked.addListener(function(info) {
    
-  
-    console.log('Item selected in A: ' + info.menuItemId);
-
+     // we check if the id of the contextmenu is 1
     if(info.menuItemId === "1"){
 
       const urli = getCurrentTab().then(res=>{
 
-        console.log(res)
-
-
         const tabid = res.id;
+        // we execute this script when menu item clicked
         chrome.scripting.executeScript(
             {
               target: {tabId: tabid},
               files: ['scriptos.js'],
             },
-            () => { console.log("execute") });
-
-
-
-
-
-
+            () => { console.log("executed scriptos") });
 
       })
-
       
     }
-
 
   });
 
