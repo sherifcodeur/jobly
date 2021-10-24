@@ -1,6 +1,3 @@
-
-
-
 function getSelectionText() {
     var text = "";
     if (window.getSelection) {

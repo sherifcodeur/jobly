@@ -1,3 +1,25 @@
+// global variable
+
+// global.job = {
+
+//   title:"",
+//   description:"",
+//   contact:""
+// }
+
+
+// job.title = "moki"
+
+// console.log(job)
+
+
+
+
+
+
+
+
+
 
 
 // launch when install the extension
@@ -6,10 +28,22 @@ chrome.runtime.onInstalled.addListener(async ()=>{
 
       // creating context menu that appear only when selected item
         chrome.contextMenus.create({
-            title: 'job title grab',
+            title: 'job title',
             id:"1",
             contexts:["selection"]          
         })
+
+        chrome.contextMenus.create({
+          title: 'job description',
+          id:"2",
+          contexts:["selection"]          
+      })
+
+      chrome.contextMenus.create({
+        title: 'job apply',
+        id:"3",
+        contexts:["selection"]          
+    })
 
         // getting url and open it in new tab
         let url = chrome.runtime.getURL("hello.html");
@@ -41,13 +75,60 @@ chrome.runtime.onInstalled.addListener(async ()=>{
         chrome.scripting.executeScript(
             {
               target: {tabId: tabid},
-              files: ['script1.js'],
+              files: ['/js/script1.js'],
             },
-            () => { console.log("executed scriptos") });
+            () => { console.log("executed script 1") });
 
       })
       
     }
+
+
+     // we check if the id of the contextmenu is 2
+     if(info.menuItemId === "2"){
+
+      const urli = getCurrentTab().then(res=>{
+
+        const tabid = res.id;
+        // we execute this script when menu item clicked
+        chrome.scripting.executeScript(
+            {
+              target: {tabId: tabid},
+              files: ['/js/script2.js'],
+            },
+            () => { console.log("executed script 2") });
+
+      })
+      
+    }
+
+
+
+         // we check if the id of the contextmenu is 3
+         if(info.menuItemId === "3"){
+
+          const urli = getCurrentTab().then(res=>{
+    
+            const tabid = res.id;
+            // we execute this script when menu item clicked
+            chrome.scripting.executeScript(
+                {
+                  target: {tabId: tabid},
+                  files: ['/js/script3.js'],
+                },
+                () => { console.log("executed script 3") });
+    
+          })
+          
+        }
+
+
+
+
+
+
+
+
 
   });
 
